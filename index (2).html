@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>OWASP Top 10</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header>
+    <h1>OWASP et les 10 risques de sécurité web</h1>
+  </header>
+
+  <main>
+
+    <h2>C'est quoi OWASP ?</h2>
+
+    <p>
+      OWASP est une organisation à but non lucratif qui aide à rendre les
+      applications web plus sûres. Elle publie gratuitement des guides et des
+      outils. Sa liste la plus connue est le
+      <a href="https://owasp.org/Top10/" target="_blank">Top 10</a>
+      des risques de sécurité.
+    </p>
+
+    <h2>Les 10 risques (édition 2025)</h2>
+
+    <ol>
+      <li>A01 : Contrôle d'accès défaillant</li>
+
+      <li class="choisi">A02 : Mauvaise configuration de sécurité (risque choisi)</li>
+
+      <li>A03 : Chaîne d'approvisionnement logicielle</li>
+      <li>A04 : Failles cryptographiques</li>
+      <li>A05 : Injection</li>
+      <li>A06 : Conception non sécurisée</li>
+      <li>A07 : Échecs d'authentification</li>
+      <li>A08 : Intégrité des logiciels ou des données</li>
+      <li>A09 : Journalisation et alertes insuffisantes</li>
+      <li>A10 : Mauvaise gestion des situations exceptionnelles</li>
+    </ol>
+
+    <h2>A01 : le contrôle d'accès défaillant</h2>
+    <p>
+      Un utilisateur peut faire des choses qu'il n'a pas le droit de faire ou
+      voir des informations qui ne sont pas pour lui.
+    </p>
+
+    <h3>Exemples</h3>
+    <ul>
+      <li>Changer le numéro dans l'adresse d'une page pour voir le compte d'un autre</li>
+      <li>Un utilisateur normal qui accède à la page administrateur</li>
+      <li>Des fichiers privés accessibles avec un lien direct</li>
+    </ul>
+
+    <h3>Comment s'en protéger</h3>
+    <ul>
+      <li>Vérifier les droits sur le serveur à chaque demande</li>
+      <li>Tout refuser par défaut, puis autoriser au cas par cas</li>
+      <li>Donner à chaque utilisateur seulement les droits dont il a besoin</li>
+    </ul>
+
+    <h3>Schéma</h3>
+    <img src="a01.png" alt="Schéma de A01">
+
+    <div class="a02">
+      <p class="etiquette">Risque choisi pour la présentation</p>
+
+      <h2>A02 : la mauvaise configuration de sécurité</h2>
+      <p>
+        Une mauvaise configuration arrive quand un serveur ou une application est
+        mal réglé. Le code peut être bon, mais un mauvais réglage laisse la porte
+        ouverte aux attaquants.
+      </p>
+      <h3>Exemples</h3>
+      <ul>
+        <li>Mot de passe par défaut jamais changé (admin / admin)</li>
+        <li>Mode debug laissé actif sur le site en ligne</li>
+        <li>Messages d'erreur qui montrent trop d'informations</li>
+        <li>Dossiers du serveur visibles par tout le monde</li>
+      </ul>
+      <h3>Comment s'en protéger</h3>
+      <ul>
+        <li>Changer tous les mots de passe par défaut</li>
+        <li>Désactiver ce qui ne sert à rien</li>
+        <li>Désactiver le mode debug en production</li>
+        <li>Vérifier régulièrement la configuration</li>
+      </ul>
+      <h3>Schéma</h3>
+      <img src="a02.png" alt="Schéma de A02">
+
+    </div>
+
+    <h2>A03 : la chaîne d'approvisionnement logicielle</h2>
+    <p>
+      Un site utilise des bibliothèques et des outils venant d'ailleurs. Si l'un
+      d'eux est piraté ou n'est plus à jour, le site devient vulnérable lui aussi.
+    </p>
+    <h3>Exemples</h3>
+    <ul>
+      <li>Une bibliothèque populaire qui a été piratée</li>
+      <li>Un composant ancien qui a une faille connue</li>
+      <li>Un outil de développement compromis</li>
+    </ul>
+    <h3>Comment s'en protéger</h3>
+    <ul>
+      <li>Mettre à jour régulièrement les composants utilisés</li>
+      <li>Télécharger uniquement depuis des sources fiables</li>
+      <li>Garder la liste de tout ce que le site utilise</li>
+    </ul>
+
+    <h3>Schéma</h3>
+    <img src="a03.png" alt="Schéma de A03">
+
+    <h2>A04 : les failles cryptographiques</h2>
+    <p>
+      Les données sensibles ne sont pas assez bien protégées. Si quelqu'un les
+      intercepte ou les vole, il peut les lire facilement.
+    </p>
+    <h3>Exemples</h3>
+    <ul>
+      <li>Mots de passe enregistrés en clair dans la base de données</li>
+      <li>Site en HTTP au lieu de HTTPS</li>
+      <li>Chiffrement ancien et trop faible</li>
+    </ul>
+    <h3>Comment s'en protéger</h3>
+    <ul>
+      <li>Utiliser HTTPS sur tout le site</li>
+      <li>Ne jamais stocker un mot de passe en clair, mais le transformer avec un algorithme adapté</li>
+      <li>Ne pas garder de données sensibles inutiles</li>
+    </ul>
+
+    <h3>Schéma</h3>
+    <img src="a04.png" alt="Schéma de A04">
+
+    <h2>A05 : l'injection</h2>
+    <p>
+      Un attaquant écrit du code malveillant dans un champ du site, par exemple
+      un formulaire. Si le site ne vérifie pas ce texte, il exécute ce code.
+    </p>
+    <h3>Exemples</h3>
+    <ul>
+      <li>Injection SQL : du code écrit dans un formulaire de connexion pour entrer sans mot de passe</li>
+      <li>Du code JavaScript caché dans un commentaire, qui s'exécute chez les autres visiteurs</li>
+      <li>Une commande envoyée au serveur à travers un champ de texte</li>
+    </ul>
+    <h3>Comment s'en protéger</h3>
+    <ul>
+      <li>Vérifier et nettoyer tout ce que l'utilisateur écrit</li>
+      <li>Utiliser des requêtes préparées pour la base de données</li>
+      <li>Ne jamais afficher du texte saisi sans le sécuriser</li>
+    </ul>
+
+    <h3>Schéma</h3>
+    <img src="a05.png" alt="Schéma de A05">
+
+    <h2>A06 : la conception non sécurisée</h2>
+    <p>
+      Le problème vient de la façon dont le site a été pensé, pas d'une erreur
+      de code. Même un code parfait ne corrige pas une mauvaise idée de départ.
+    </p>
+    <h3>Exemples</h3>
+    <ul>
+      <li>Aucune limite au nombre d'essais de mot de passe</li>
+      <li>Une question secrète dont la réponse se devine facilement</li>
+      <li>Un remboursement possible sans aucune vérification</li>
+    </ul>
+    <h3>Comment s'en protéger</h3>
+    <ul>
+      <li>Penser à la sécurité dès le début du projet</li>
+      <li>Imaginer comment un attaquant pourrait détourner chaque fonction</li>
+      <li>Tester aussi les mauvais usages, pas seulement les bons</li>
+    </ul>
+
+    <h3>Schéma</h3>
+    <img src="a06.png" alt="Schéma de A06">
+
+    <h2>A07 : les échecs d'authentification</h2>
+    <p>
+      La connexion au site est mal protégée. Un attaquant peut se faire passer
+      pour un autre utilisateur.
+    </p>
+    <h3>Exemples</h3>
+    <ul>
+      <li>Mots de passe trop faibles acceptés, comme « 123456 »</li>
+      <li>Pas de double authentification</li>
+      <li>Session qui ne se ferme jamais, même après déconnexion</li>
+    </ul>
+    <h3>Comment s'en protéger</h3>
+    <ul>
+      <li>Activer la double authentification</li>
+      <li>Exiger des mots de passe solides</li>
+      <li>Limiter le nombre d'essais de connexion</li>
+      <li>Fermer les sessions après un certain temps</li>
+    </ul>
+
+    <h3>Schéma</h3>
+    <img src="a07.png" alt="Schéma de A07">
+
+    <h2>A08 : l'intégrité des logiciels ou des données</h2>
+    <p>
+      Le site fait confiance à des mises à jour ou à des données sans vérifier
+      qu'elles n'ont pas été modifiées par quelqu'un d'autre.
+    </p>
+    <h3>Exemples</h3>
+    <ul>
+      <li>Une mise à jour installée sans vérifier d'où elle vient</li>
+      <li>Un script externe chargé sur le site sans aucun contrôle</li>
+      <li>Des données envoyées au site que l'utilisateur peut modifier</li>
+    </ul>
+    <h3>Comment s'en protéger</h3>
+    <ul>
+      <li>Vérifier la signature des mises à jour et des fichiers</li>
+      <li>N'utiliser que des sources de confiance</li>
+      <li>Contrôler les données reçues avant de les utiliser</li>
+    </ul>
+
+    <h3>Schéma</h3>
+    <img src="a08.png" alt="Schéma de A08">
+
+    <h2>A09 : la journalisation et les alertes insuffisantes</h2>
+    <p>
+      Le site n'enregistre pas ce qui se passe et ne prévient personne en cas de
+      problème. Une attaque peut durer longtemps sans être vue.
+    </p>
+    <h3>Exemples</h3>
+    <ul>
+      <li>Les connexions ratées ne sont pas enregistrées</li>
+      <li>Aucune alerte quand quelqu'un essaie 1000 mots de passe</li>
+      <li>Des journaux qui existent mais que personne ne lit</li>
+    </ul>
+    <h3>Comment s'en protéger</h3>
+    <ul>
+      <li>Enregistrer les événements importants (connexions, erreurs, actions sensibles)</li>
+      <li>Mettre en place des alertes automatiques</li>
+      <li>Garder les journaux un certain temps, sans y écrire de mots de passe</li>
+    </ul>
+
+    <h3>Schéma</h3>
+    <img src="a09.png" alt="Schéma de A09">
+
+    <h2>A10 : la mauvaise gestion des situations exceptionnelles</h2>
+    <p>
+      Le site gère mal les erreurs et les cas inattendus. Il peut planter, donner
+      trop d'informations ou même laisser passer des personnes qui n'ont pas le droit.
+    </p>
+    <h3>Exemples</h3>
+    <ul>
+      <li>Une erreur non prévue qui fait tomber tout le site</li>
+      <li>Un message d'erreur qui montre le code ou la base de données</li>
+      <li>En cas de problème, le système laisse l'accès ouvert au lieu de le bloquer</li>
+    </ul>
+    <h3>Comment s'en protéger</h3>
+    <ul>
+      <li>Prévoir ce qui se passe quand une erreur arrive</li>
+      <li>En cas de doute, refuser l'accès plutôt que l'autoriser</li>
+      <li>Afficher des messages d'erreur simples à l'utilisateur</li>
+      <li>Tester les cas inhabituels</li>
+    </ul>
+
+    <h3>Schéma</h3>
+    <img src="a10.png" alt="Schéma de A10">
+
+    <h2>Schéma : la mauvaise configuration (A02)</h2>
+    <img src="schema.png" alt="Schéma de la mauvaise configuration de sécurité">
+
+    <p>Source : <a href="https://owasp.org/Top10/" target="_blank">OWASP Top 10</a></p>
+
+  </main>
+
+</body>
+</html>
